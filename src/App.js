@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { fetchProvinsiData, fetchCardData } from "./utils/api";
 import Cards from "./components/Cards";
-
-import { fetchCardData } from "./utils/api";
-
+import CitySelector from "./components/CitySelector";
 function App() {
-  React.useEffect(() => {
-    const fetchCard = async () => {
-      return await fetchCardData();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const indonesia = await fetchCardData();
+      const provinsi = await fetchProvinsiData();
+      setData({ indonesia, provinsi });
     };
-    console.log(fetchCard());
+    fetch();
   }, []);
+
+  const changeProvince = (e) => {
+    console.log(e.target.value);
+    const selected = data.find(
+      (provinsi) => provinsi.provinsi === e.target.value
+    );
+    console.log(selected);
+  };
   return (
     <div className="App">
       <Cards />
+      <CitySelector data={data} changeProvince={changeProvince} />
     </div>
   );
 }

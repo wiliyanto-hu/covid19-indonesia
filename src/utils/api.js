@@ -7,3 +7,9 @@ export const fetchCardData = async () => {
 
   return data;
 };
+export const fetchProvinsiData = async () => {
+  const { data } = await axios.get(
+    "https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi"
+  );
+  return data;
+};
