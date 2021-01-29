@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography } from "@material-ui/core";
-import { fetchCardData } from "../utils/api";
+import { Grid } from "@material-ui/core";
 
 import Card from "./Card";
-const Cards = () => {
+const Cards = ({ provinces, selected }) => {
   const [data, setData] = useState("");
 
+  const setProvince = (selected = "INDONESIA") => {
+    const getProvince = provinces.find(
+      (province) => province.provinsi === selected
+    );
+    setData(getProvince);
+  };
   useEffect(() => {
-    const fetchCard = async () => {
-      const data = await fetchCardData();
-      setData(data);
-    };
-    fetchCard();
-  }, []);
-
+    setProvince(selected);
+  }, [provinces, selected]);
   if (!data) {
     return (
       <Card
@@ -23,16 +23,13 @@ const Cards = () => {
       />
     );
   } else {
-    const { positif, dirawat, sembuh, meninggal, lastUpdate } = data;
+    const { positif, dirawat, sembuh, meninggal, kasus } = data;
     return (
       <>
-        <Typography variant="subtitle1">
-          Last Update: {new Date(lastUpdate).toDateString()}
-        </Typography>{" "}
         <Grid container spacing={2} justify="center">
           <Card
             type="Cases"
-            total={positif}
+            total={positif || kasus}
             color="white"
             bgColor="rgba(230,0,0,0.7)"
           />
