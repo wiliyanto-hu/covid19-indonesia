@@ -13,3 +13,9 @@ export const fetchProvinsiData = async () => {
   );
   return data;
 };
+export const fetchCumulativeData = async () => {
+  const { data } = await axios.get(
+    "https://apicovid19indonesia-v2.vercel.app/api/indonesia/harian"
+  );
+  return data;
+};

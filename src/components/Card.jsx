@@ -13,7 +13,7 @@ const SingleCard = ({ type, total, classes, color, bgColor }) => (
       <CardContent>
         <Typography variant="h4">{type}</Typography>
         <Typography variant="h4">
-          <CountUp start={0} end={total} duration={5} separator="," />
+          <CountUp start={0} end={parseInt(total)} duration={5} separator="," />
         </Typography>
       </CardContent>
     </Card>
