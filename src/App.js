@@ -10,12 +10,20 @@ function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetch = async () => {
-      const indonesia = await fetchCardData();
-      const provinsi = await fetchProvinsiData();
-      setData({
-        provinsi: [{ ...indonesia, provinsi: "INDONESIA" }, ...provinsi],
-        lastUpdate: indonesia.lastUpdate,
-      });
+      try {
+        const indonesia = await fetchCardData();
+        const provinsi = await fetchProvinsiData();
+        setData({
+          provinsi: [{ ...indonesia, provinsi: "INDONESIA" }, ...provinsi],
+          lastUpdate: indonesia.lastUpdate,
+        });
+      } catch (e) {
+        console.log(e, "HERE");
+        setData({
+          error:
+            "Something went wrong, please check your connection and try again later",
+        });
+      }
     };
     fetch();
   }, []);
@@ -23,18 +31,17 @@ function App() {
   const changeProvince = (e) => {
     setData({ ...data, selected: e.target.value });
   };
-  if (!data.provinsi) {
-    return <h1>Loading......</h1>;
+  if (data.error) {
+    return <h1 style={{ textAlign: "center" }}>{data.error}</h1>;
+  } else if (!data.provinsi) {
+    return <h1 style={{ textAlign: "center" }}>Loading Data......</h1>;
   }
+  const { provinsi, lastUpdate, selected } = data;
   return (
     <div className="App">
-      <ProvinceSelector data={data.provinsi} changeProvince={changeProvince} />
-      <p>{`Last Update: ${new Date(data.lastUpdate).toDateString()}`}</p>
-      <Cards
-        provinces={data.provinsi}
-        selected={data.selected}
-        isMobile={isMobile}
-      />
+      <ProvinceSelector data={provinsi} changeProvince={changeProvince} />
+      <p>{`Last Update: ${new Date(lastUpdate).toDateString()}`}</p>
+      <Cards provinces={provinsi} selected={selected} isMobile={isMobile} />
       {isBrowser && <LineChart />}
     </div>
   );
