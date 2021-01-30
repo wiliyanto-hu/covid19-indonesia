@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-
+import BarChart from "./BarChart";
 import Card from "./Card";
 const Cards = ({ provinces, selected }) => {
   const [data, setData] = useState("");
@@ -34,7 +34,7 @@ const Cards = ({ provinces, selected }) => {
             bgColor="rgba(230,0,0,0.7)"
           />
           <Card
-            type="In Recovery"
+            type="Recovery"
             total={dirawat}
             color="white"
             bgColor="rgba(0,0,200,0.7)"
@@ -52,6 +52,7 @@ const Cards = ({ provinces, selected }) => {
             bgColor="rgba(170,0,0,0.9)"
           />
         </Grid>
+        <BarChart data={data} />
       </>
     );
   }
