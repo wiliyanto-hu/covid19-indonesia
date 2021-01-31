@@ -1,20 +1,31 @@
 import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import CountUp from "react-countup";
-import { isMobile } from "react-device-detect";
+import size from "../utils/sizeHelper";
 
 const styles = {
   Card: {
     backgroundColor: (props) => (props.bgColor ? props.bgColor : "white"),
     color: (props) => (props.color ? props.color : "black"),
   },
+  CardFont: {
+    fontSize: "2.2rem",
+    [size("md")]: {
+      fontSize: "1.7rem",
+    },
+    [size("xs")]: {
+      fontSize: "1.3rem",
+    },
+  },
 };
 const SingleCard = ({ type, total, classes, color, bgColor }) => (
   <Grid item xs={5} sm={5} md={3} lg={2}>
     <Card className={classes.Card}>
       <CardContent>
-        <Typography variant={`${isMobile ? "h5" : "h4"}`}>{type}</Typography>
-        <Typography variant={`${isMobile ? "h5" : "h4"}`}>
+        <Typography variant="h4" className={classes.CardFont}>
+          {type}
+        </Typography>
+        <Typography variant="h4" className={classes.CardFont}>
           <CountUp start={0} end={parseInt(total)} duration={5} separator="," />
         </Typography>
       </CardContent>

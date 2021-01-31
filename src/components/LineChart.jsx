@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/styles";
 import { Line } from "react-chartjs-2";
 import dateFormat from "../utils/dateFormat";
+import size from "../utils/sizeHelper";
 import { fetchCumulativeData } from "../utils/api";
 const styles = {
   container: {
     marginTop: "2rem",
     width: "85%",
+    [size("xs")]: {
+      display: "none",
+    },
   },
 };
 const LineChart = ({ classes }) => {

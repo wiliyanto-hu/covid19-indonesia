@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Cards from "./components/Cards";
 import ProvinceSelector from "./components/ProvinceSelector";
 import LineChart from "./components/LineChart";
-import { isBrowser, isMobile } from "react-device-detect";
 import "./App.css";
 import { fetchProvinsiData, fetchCardData } from "./utils/api";
 
@@ -39,10 +38,11 @@ function App() {
   const { provinsi, lastUpdate, selected } = data;
   return (
     <div className="App">
+      <h2>Indonesia COVID-19 Cases</h2>
       <ProvinceSelector data={provinsi} changeProvince={changeProvince} />
       <p>{`Last Update: ${new Date(lastUpdate).toDateString()}`}</p>
-      <Cards provinces={provinsi} selected={selected} isMobile={isMobile} />
-      {isBrowser && <LineChart />}
+      <Cards provinces={provinsi} selected={selected} />
+      <LineChart />
     </div>
   );
 }
