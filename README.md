@@ -1,7 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+# Simple Covid19 Tracker for Indonesia
+API : https://apicovid19indonesia-v2.vercel.app/api
 ## Available Scripts
 
 In the project directory, you can run:
