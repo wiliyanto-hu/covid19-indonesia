@@ -34,7 +34,7 @@ const Cards = ({ provinces, selected }) => {
             bgColor="rgba(230,0,0,0.7)"
           />
           <Card
-            type="Recovery"
+            type="In Recovery"
             total={dirawat}
             color="white"
             bgColor="rgba(0,0,200,0.7)"

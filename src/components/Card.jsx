@@ -9,7 +9,7 @@ const styles = {
     color: (props) => (props.color ? props.color : "black"),
   },
   CardFont: {
-    fontSize: "2.2rem",
+    fontSize: "1.9rem",
     [size("md")]: {
       fontSize: "1.7rem",
     },

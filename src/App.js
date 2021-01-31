@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./components/Cards";
 import ProvinceSelector from "./components/ProvinceSelector";
 import LineChart from "./components/LineChart";
+import Table from "./components/Table";
 import "./App.css";
 import { fetchProvinsiData, fetchCardData } from "./utils/api";
 
@@ -43,6 +44,7 @@ function App() {
       <p>{`Last Update: ${new Date(lastUpdate).toDateString()}`}</p>
       <Cards provinces={provinsi} selected={selected} />
       <LineChart />
+      <Table provinsis={provinsi} />
     </div>
   );
 }
