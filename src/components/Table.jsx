@@ -7,11 +7,16 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import size from "../utils/sizeHelper";
 
 const useStyles = makeStyles({
   table: {
     width: "85%",
     margin: "1rem",
+    display: "none",
+    [size("xs")]: {
+      display: "block",
+    },
   },
 });
 

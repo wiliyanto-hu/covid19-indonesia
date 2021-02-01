@@ -3,6 +3,7 @@ import Cards from "./components/Cards";
 import ProvinceSelector from "./components/ProvinceSelector";
 import LineChart from "./components/LineChart";
 import Table from "./components/Table";
+import DataGrid from "./components/DataGrid";
 import "./App.css";
 import { fetchProvinsiData, fetchCardData } from "./utils/api";
 
@@ -12,9 +13,15 @@ function App() {
     const fetch = async () => {
       try {
         const indonesia = await fetchCardData();
-        const provinsi = await fetchProvinsiData();
+        const rawProvinsi = await fetchProvinsiData();
+        const provinsi = rawProvinsi.map((prov, idx) => {
+          return { ...prov, id: idx };
+        });
         setData({
-          provinsi: [{ ...indonesia, provinsi: "INDONESIA" }, ...provinsi],
+          provinsi: [
+            { ...indonesia, provinsi: "INDONESIA", id: 99 },
+            ...provinsi,
+          ],
           lastUpdate: indonesia.lastUpdate,
         });
       } catch (e) {
@@ -44,6 +51,7 @@ function App() {
       <p>{`Last Update: ${new Date(lastUpdate).toDateString()}`}</p>
       <Cards provinces={provinsi} selected={selected} />
       <LineChart />
+      <DataGrid provinsis={provinsi} />
       <Table provinsis={provinsi} />
     </div>
   );
