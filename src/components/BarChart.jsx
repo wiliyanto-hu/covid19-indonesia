@@ -7,20 +7,24 @@ const styles = {
     marginTop: "3rem",
   },
 };
-const BarChart = ({ data, classes }) => {
+const BarChart = ({ data, classes, indo }) => {
   if (!data) {
     return null;
   }
   const { positif, dirawat, sembuh, meninggal, kasus } = data;
 
+  const labels = () => {
+    if (indo) return ["Kasus", "Dirawat", "Sembuh", "Meninggal"];
+    return ["Cases", "In Recovery", "Recovered", "Deaths"];
+  };
   return (
     <section className={classes.container}>
       <Bar
         data={{
-          labels: ["Cases", "In Recovery", "Recovered", "Deaths"],
+          labels: labels(),
           datasets: [
             {
-              label: "People",
+              label: indo ? "Orang" : "People",
               data: [positif || kasus, dirawat, sembuh, meninggal],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.6)",

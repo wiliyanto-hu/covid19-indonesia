@@ -13,7 +13,7 @@ const styles = {
     },
   },
 };
-const LineChart = ({ classes }) => {
+const LineChart = ({ classes, indo }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetch = async () => {
@@ -28,34 +28,34 @@ const LineChart = ({ classes }) => {
 
   return (
     <section className={classes.container}>
-      <h2>Cumulative Cases chart</h2>
+      <h2>{indo ? "Grafik Kasus Kumulatif" : "Cumulative Cases chart"}</h2>
       <Line
         data={{
           labels: data.map((data) => dateFormat(data.tanggal)),
           datasets: [
             {
-              label: "Case",
+              label: indo ? "Kasus" : "Case",
               data: data.map((data) => data.positif_kumulatif),
               backgroundColor: ["rgba(230, 105, 180, 0)"],
               borderColor: "rgba(230, 105, 180, 0.7)",
               fill: true,
             },
             {
-              label: "Recovered ",
+              label: indo ? "Sembuh" : "Recovered ",
               data: data.map((data) => data.sembuh_kumulatif),
               backgroundColor: ["rgba(0, 250 , 0, 0)"],
               borderColor: "rgba(0, 250 , 0, 0.7)",
               fill: true,
             },
             {
-              label: "In Recovery ",
+              label: indo ? "Dirawat" : "In Recovery ",
               data: data.map((data) => data.dirawat_kumulatif),
               backgroundColor: ["rgba(0 , 0, 200, 0)"],
               borderColor: "rgba(0,0,200,0.7)",
               fill: true,
             },
             {
-              label: "Deaths ",
+              label: indo ? "Meninggal" : "Deaths ",
               data: data.map((data) => data.meninggal_kumulatif),
               backgroundColor: ["rgba(255 , 0, 0, 0)"],
               borderColor: "rgba(255,0,0,0.7)",

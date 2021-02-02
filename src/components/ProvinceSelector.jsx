@@ -1,5 +1,5 @@
 import { FormControl, NativeSelect, InputLabel } from "@material-ui/core";
-const ProvinceSelector = ({ data, changeProvince }) => {
+const ProvinceSelector = ({ data, changeProvince, indo }) => {
   if (!data) {
     return null;
   }
@@ -10,7 +10,9 @@ const ProvinceSelector = ({ data, changeProvince }) => {
   ));
   return (
     <FormControl margin="normal">
-      <InputLabel htmlFor="select">Select Province</InputLabel>
+      <InputLabel htmlFor="select">
+        {indo ? "Pilih Provinsi" : "Select Province"}
+      </InputLabel>
       <NativeSelect onChange={changeProvince} id="select">
         {provinsis}
       </NativeSelect>

@@ -12,7 +12,7 @@ import size from "../utils/sizeHelper";
 const useStyles = makeStyles({
   table: {
     width: "85%",
-    margin: "1rem",
+    marginTop: "2.5rem",
     display: "none",
     [size("xs")]: {
       display: "block",
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicTable({ provinsis }) {
+export default function BasicTable({ provinsis, indo }) {
   const classes = useStyles();
 
   if (!provinsis) return null;
@@ -31,10 +31,16 @@ export default function BasicTable({ provinsis }) {
           <TableHead>
             <TableRow>
               <TableCell>Province</TableCell>
-              <TableCell align="center">Cases</TableCell>
-              <TableCell align="center">In Recovery</TableCell>
-              <TableCell align="center">Recovered</TableCell>
-              <TableCell align="center">Deaths</TableCell>
+              <TableCell align="center">{indo ? "Kasus" : "Cases"}</TableCell>
+              <TableCell align="center">
+                {indo ? "Dirawat" : "In Recovery"}
+              </TableCell>
+              <TableCell align="center">
+                {indo ? "Sembuh" : "Recovered"}
+              </TableCell>
+              <TableCell align="center">
+                {indo ? "Meninggal" : "Deaths"}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

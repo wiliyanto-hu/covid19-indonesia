@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import BarChart from "./BarChart";
 import Card from "./Card";
-const Cards = ({ provinces, selected }) => {
+const Cards = ({ provinces, selected, indo }) => {
   const [data, setData] = useState("");
 
   const setProvince = (selected = "INDONESIA") => {
@@ -28,31 +28,31 @@ const Cards = ({ provinces, selected }) => {
       <>
         <Grid container spacing={2} justify="center">
           <Card
-            type="Cases"
+            type={indo ? "Kasus" : "Cases"}
             total={positif || kasus}
             color="white"
             bgColor="rgba(230,0,0,0.7)"
           />
           <Card
-            type="In Recovery"
+            type={indo ? "Dirawat" : "In Recovery"}
             total={dirawat}
             color="white"
             bgColor="rgba(0,0,200,0.7)"
           />
           <Card
-            type="Recovered"
+            type={indo ? "Sembuh" : "Recovered"}
             total={sembuh}
             color="white"
             bgColor="rgba(0,170,0,0.9)"
           />
           <Card
-            type="Deaths"
+            type={indo ? "Meninggal" : "Deaths"}
             total={meninggal}
             color="white"
             bgColor="rgba(170,0,0,0.9)"
           />
         </Grid>
-        <BarChart data={data} />
+        <BarChart data={data} indo={indo} />
       </>
     );
   }

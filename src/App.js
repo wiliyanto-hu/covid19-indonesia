@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { Switch } from "@material-ui/core";
 import Cards from "./components/Cards";
 import ProvinceSelector from "./components/ProvinceSelector";
 import LineChart from "./components/LineChart";
 import Table from "./components/Table";
 import DataGrid from "./components/DataGrid";
-import "./App.css";
+import dateFormat from "./utils/dateFormat";
 import { fetchProvinsiData, fetchCardData } from "./utils/api";
+import toggler from "./hooks/toggler";
+import "./App.css";
 
 function App() {
   const [data, setData] = useState([]);
+  const [indo, toggleEn] = toggler(true);
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -25,7 +29,6 @@ function App() {
           lastUpdate: indonesia.lastUpdate,
         });
       } catch (e) {
-        console.log(e, "HERE");
         setData({
           error:
             "Something went wrong, please check your connection and try again later",
@@ -44,15 +47,26 @@ function App() {
     return <h1 style={{ textAlign: "center" }}>Loading Data......</h1>;
   }
   const { provinsi, lastUpdate, selected } = data;
+
   return (
     <div className="App">
-      <h2>Indonesia COVID-19 Cases</h2>
-      <ProvinceSelector data={provinsi} changeProvince={changeProvince} />
-      <p>{`Last Update: ${new Date(lastUpdate).toDateString()}`}</p>
-      <Cards provinces={provinsi} selected={selected} />
-      <LineChart />
-      <DataGrid provinsis={provinsi} />
-      <Table provinsis={provinsi} />
+      <div className="Language">
+        <span>{indo ? "ID" : "EN"}</span>
+        <Switch checked={indo} onChange={toggleEn} color="default" />
+      </div>
+      <h2>{indo ? "Kasus COVID-19 Indonesia" : "Indonesia COVID-19 Cases"}</h2>
+      <ProvinceSelector
+        data={provinsi}
+        changeProvince={changeProvince}
+        indo={indo}
+      />
+      <p>{`${indo ? "Diperbarui" : "Last Update"}: ${dateFormat(
+        lastUpdate
+      )}`}</p>
+      <Cards provinces={provinsi} selected={selected} indo={indo} />
+      <LineChart indo={indo} />
+      <DataGrid provinsis={provinsi} indo={indo} />
+      <Table provinsis={provinsi} indo={indo} />
     </div>
   );
 }
