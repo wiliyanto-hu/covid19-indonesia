@@ -1,6 +1,7 @@
 # Simple Covid19 Tracker for Indonesia
 API : https://apicovid19indonesia-v2.vercel.app/api
-Live Demo : https:wiliyanto-hu.github.io/covid19-indonesia
+
+Live Demo : https://wiliyanto-hu.github.io/covid19-indonesia
 ## Available Scripts
 
 In the project directory, you can run:
