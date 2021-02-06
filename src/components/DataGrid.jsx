@@ -30,6 +30,7 @@ function DataGridTable({ provinsis, classes, indo }) {
       type: "number",
       headerAlign: "center",
       align: "center",
+      sort: "asc",
     },
     {
       field: "meninggal",
@@ -58,18 +59,23 @@ function DataGridTable({ provinsis, classes, indo }) {
   ];
 
   const rows = React.useMemo(() => {
-    console.log("Render");
     if (!provinsis) return null;
     return provinsis.filter((provinsi) => provinsi.provinsi !== "INDONESIA");
   }, [provinsis]);
   return (
     <div className={classes.DataGrid}>
+      <p>
+        {indo
+          ? "Tekan header pada tabel untuk mengurutkan baris"
+          : "Click on header to sort"}
+      </p>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={rows.length}
         checkboxSelection={false}
         disableColumnMenu
+        disableColumnReorder={true}
         hideFooterPagination
         hideFooter
       />
